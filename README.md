@@ -8,35 +8,42 @@
 - **Microsoft Excel (VBA & Solver ToolPak)**
 - **Statistical Techniques:** Maximum Likelihood Estimation (MLE)
 
-**Model Overview:**
+**Technical Implementation:**
 
-**1. Vasicek Model:**
-- Assumes mean-reversion with normally distributed innovations.
-- Can produce negative interest rates due to its normal distribution assumption.
-- Parameters estimated: speed of mean reversion (𝑘), long-term mean (𝜃), and volatility (𝜎).
+**Models Used:**
+- **Vasicek Model:** Allows for negative interest rates, has constant volatility.
+- **CIR Model:** Enforces non-negativity constraint on interest rates, with volatility dependent on the square root of the rate.
 
-**2. Cox-Ingersoll-Ross (CIR) Model:**
-- Also mean-reverting but ensures non-negativity of rates by using square-root diffusion.
-- More realistic for modeling short-term interest rates, especially in low-rate environments.
-- Parameters estimated: same as Vasicek.
+**Calibration Technique:** 
+- Used **Maximum Likelihood Estimation (MLE)** to estimate model parameters (speed of mean reversion, long-term mean, and volatility) based on historical interest rate data.
+- Built custom MLE optimizations in Excel using Solver and array formulas.
 
-**Calibration Approach:** Both models were calibrated using **Maximum Likelihood Estimation (MLE)** in Excel.
-- Custom VBA functions were created to compute the log-likelihood of observed rate paths under both models.
-- Excel Solver was used to optimize the parameters by maximizing the likelihood.
+**Monte Carlo Simulations:**
+- Simulated **multiple interest rate paths** under each model to observe behavior over time.
+- Used **random number generation** and stochastic differential equation discretization.
+
+**Visualization:**
+- Plotted the simulated paths, model-implied trajectories, and probability distributions to visually compare results.
+- Created **interactive Excel charts** to highlight differences in rate dynamics and volatility behavior.
 
 **Key Outcomes & Insights:**
 
-**1. Goodness-of-fit:**
-- The CIR model showed better fit to the empirical interest rate data, particularly in capturing rate behavior during periods of low interest rates.
-- The Vasicek model, while easier to implement, occasionally predicted negative rates, which is unrealistic in many real-world scenarios.
+**1.Model Performance:**
+- CIR Model provided more realistic and stable interest rate paths, especially under low-rate environments, due to its non-negativity feature.
+- Vasicek Model, while mathematically simpler, occasionally produced negative rates, making it less suitable in certain financial applications (e.g., bond pricing).
 
 **2. Volatility Behavior:**
-- The CIR model successfully captured the volatility clustering often seen in real-world data due to its dependence on the level of the interest rate.
-- Vasicek’s constant volatility assumption proved too simplistic for accurate forecasting in varied market conditions.
+- CIR’s volatility is rate-dependent, which makes it better at capturing increased uncertainty during high-rate regimes.
+- Vasicek's constant volatility assumption oversimplified the rate dynamics, particularly in volatile period
 
-**3. Use Cases:**
-- CIR model is preferred in regulatory environments and for risk management applications where negative rates are not permissible.
-- Vasicek model is simpler and computationally faster — suitable for quick simulations or environments where negative rates might be acceptable (e.g., Eurozone).
+**3. Simulation Analysis:**
+- CIR simulations showed mean-reverting and non-negative paths that aligned better with observed market behavior.
+- Vasicek's paths were smoother, but lacked realism during stress periods.
+
+**4. Model Selection:** CIR emerged as the better model for the given dataset and simulation objectives due to:
+- Non-negativity
+- Realistic volatility patterns
+- Superior fit under MLE calibration (as seen via likelihood metrics and residual analysis)
 
 **Conclusion:**
 This project provided hands-on experience in quantitative finance, model calibration, and time-series analysis using Excel. The CIR model emerged as the more robust and realistic model, especially in post-2008 low-interest regimes. The project also deepened my understanding of stochastic differential equations, calibration techniques, and Excel-based quantitative modeling.
