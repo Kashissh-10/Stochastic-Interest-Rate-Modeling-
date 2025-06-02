@@ -28,7 +28,7 @@
 
 **Key Outcomes & Insights:**
 
-**1.Model Performance:**
+**1. Model Performance:**
 - **CIR Model** provided more **realistic and stable interest rate paths**, especially under low-rate environments, due to its non-negativity feature.
 - **Vasicek Model**, while mathematically simpler, occasionally produced **negative rates**, making it less suitable in certain financial applications (e.g., bond pricing).
 
@@ -41,6 +41,7 @@
 - Vasicek's paths were smoother, but lacked realism during stress periods.
 
 **4. Model Selection:** 
+
 **CIR emerged as the better model** for the given dataset and simulation objectives due to:
 - Non-negativity
 - Realistic volatility patterns
